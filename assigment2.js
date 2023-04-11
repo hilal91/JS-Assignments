@@ -1,74 +1,108 @@
-// TASK 1
-// let inputOne = prompt("First Input In Numbers");
-// let inputTwo = prompt("Second Input In Numbers");
-// if (inputOne >= inputTwo) {
-//     console.log("first input " + inputOne  + " is greater then second input " + inputTwo );
-// } else {
-//     console.log("second input " + inputTwo  + " is greater then first input " + inputOne );
-// }
+let student = {
+    name: 'fahad kamran',
+    roll: 'JS-124387',
+    courseName: 'JS-CRASH-COURSE',
+    age: 24,
+    qualification: 'graduate',
+    mentor: 'Ishaq Bhojani',
+    cnic: 'xxxxx-xxxxxxx-x'
+}
 
-
-// TASK2
-// let numberInput = prompt("Input In Numbers");
-// if (numberInput >= 0) {
-//     console.log("The sign is +");
-// } else {
-//     console.log("The sign is -");
-// }
-
-
-// TASK 3
-let inputOne = prompt("First Input In Numbers");
-let inputTwo = prompt("Second Input In Numbers");
-let inputThree = prompt("Third Input In Numbers");
-let inputFour = prompt("Fourth Input In Numbers");
-let inputFive = prompt("Fifth Input In Numbers");
-
-let findGreater = [inputOne, inputTwo, inputThree, inputFour, inputFive];
-
-let largest = findGreater[0];
-
-for (let i = 0; i < findGreater.length; i++) {
-    if (largest < findGreater[i] ) {
-        largest = findGreater[i];
+// QUESTION # 01
+// **********
+function myClosures(num1) {
+    return function (num2) {
+        return num1 + num2;
     }
 }
-console.log(largest);
+let sum = myClosures(5);
+console.log('Q # 1 ===>', sum(6));
+// **********
 
-
-// Task 4
-for (var x=0; x<=15; x++) {
-        if (x === 0) {
-			console.log(x + " is even number");
-        }
-        else if (x % 2 === 0) {
-			console.log(x + " is even number");   
+// QUESTION # 02
+// **********
+let dummyArr = ['faizan', 'shayan', 'anas', 'zubair', 'fahad', 'hilal', 'junai', 'asad', 'ishaq', 'bhojani'];
+let count = 0;
+function findFunction(str) {
+    //  debugger
+    if (count < dummyArr.length) {
+        if (dummyArr[count] == str) {
+            return true;
         }
         else {
-			console.log(x + " is odd number");
+            count ++
+            return findFunction(str)
         }
+    }
+    else {
+        return false;
+    }
 }
+console.log('Q # 2',findFunction('bhojani'));
+// **********
 
+// QUESTION # 03
+// **********
+const addPara = (str) => {
+    // create new element <p></p>
+    let newPara = document.createElement('p');
+    let newParaText = document.createTextNode(str);
+    newPara.appendChild(newParaText);
 
-// TASK 6
-for ( var i = 1; i <= 100; i++ )
-{
-  if ( i%3 === 0 && i%5 === 0 ) {
-    console.log( i + " FizzBuzz" );
-  }
-  else if ( i%3 === 0 ) {
-    console.log(i+ " Fizz" );
-  }
-  else if ( i%5 === 0 ) {
-    console.log(i+ " Buzz" );
-  }
-  else {
-    console.log(i);
-  }
+    document.body.appendChild(newPara)
 }
+// pass argument paragraph text
+addPara('Add this paragraph from DOM manipulation');
+// **********
 
+// QUESTION # 04
+// **********
+const unorderList = (str) => {
+    let myUl = document.getElementById('unorderList');  // get unordered-list
+    let myLi = document.createElement('li');   // create li
+    let liText = document.createTextNode(str); // create textNode
+    myLi.appendChild(liText);                  // asign textNode on li
+    myUl.appendChild(myLi)
+}
+unorderList('Lorem ipsum, dolor sit amet consectetur adipisicing elit.');  // call function and pass string argument
+// **********
 
-// TASK 7
-for(var i=1; i<=5; i++){
-       console.log("* ".repeat(i));
- }
+// QUESTION # 05
+// **********
+const changeBgColor = (id, color) => {
+    document.getElementById(id).style.backgroundColor = color;
+};
+changeBgColor('body', 'green');
+// **********
+
+// QUESTION # 06
+// **********
+const setLocalStorage = (key, obj) => {
+    localStorage.setItem(key, JSON.stringify(obj));
+}
+setLocalStorage('student', student);
+// **********
+
+// QUESTION # 07
+// **********
+const getLocalStorage = (key) => {
+    console.log('Q # 7 ==>', localStorage.getItem(key));
+}
+getLocalStorage('student');
+// **********
+
+// QUESTION # 08
+// **********
+const setLocalData = (data) => { // create function
+    Object.keys(data).forEach(function (key) {
+        localStorage.setItem(key, data[key]);
+    });
+    let newObj = new Object(); // create new object
+    Object.keys(data).forEach(function (key) {
+        newObj[key] = localStorage.getItem(key)
+    });
+    return newObj;  // return object
+}
+let getNewObject = setLocalData(student); // call function and pass object as an argument
+console.log('Q # 8 ==>', getNewObject);
+// **********
